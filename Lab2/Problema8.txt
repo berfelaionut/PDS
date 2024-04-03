@@ -1,0 +1,11 @@
+%Prob 8 _ 5 perioade corespunzatoare unei secvente rectangulare si dinte 
+% de fierastrau, avand 15 esantioane pe perioada
+clear variables;
+n = 0:74; % 15 esant => 5*15 = 75
+f = 1/15;
+square_seq = square(2*pi*f*n);
+sawtooth_seq = sawtooth(2*pi*f*n);
+figure, grid, hold on
+subplot(211); stem(n, square_seq)
+subplot(212); stem(n, sawtooth_seq)
+hold off

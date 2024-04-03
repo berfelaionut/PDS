@@ -1,0 +1,9 @@
+%Prob 9 _ Secventa rampa, de lungime 101, cu val init 0, increment 0.01. 
+% Sa se reprezinte secventa pentru 20 <= n <= 30
+clear variables;
+%n = 0:0.01:100;
+x(1) = 0;
+for i = 1:100
+    x(i+1) = x(i) + 0.01;
+end
+figure, stem(20:30, x(21:31));

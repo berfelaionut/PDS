@@ -1,0 +1,9 @@
+%Prob 16 _ zg Gaussian Medie 0 si varianta 0.1
+clear variables;
+n = 0:99;
+x1_n = 1*(n==0)-1*(n==5);
+a = 0; % medie
+b = 0.1; % varianta
+zg_gauss = a + sqrt(b)*randn(1, length(x1_n));
+x1_n_zg = x1_n + zg_gauss;
+figure, stem(n, x1_n_zg), grid,

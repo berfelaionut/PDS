@@ -1,0 +1,6 @@
+clear variables;
+n = 0:19;
+x = (100/19)*n; % sau x = linspace(0,100,20);
+figure, 
+stem(n, x), grid,
+axis([0 19 0 100]);

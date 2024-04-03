@@ -1,0 +1,11 @@
+%Prob 14 _ x1(n) = Sigma(n) - Sigma(n-5)
+%        _ x2(n) = u(n-5)
+clear variables;
+n = 0:99;
+x1_n = 1*(n==0)-1*(n==5);
+figure, stem(n, x1_n), grid,
+
+clear variables;
+n = 0:99;
+x2_n = 1.*(n>=5);
+figure, stem(n, x2_n), grid

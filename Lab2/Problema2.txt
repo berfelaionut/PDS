@@ -1,0 +1,10 @@
+clear variables;
+n = 0:199;
+x_n = exp(-0.1*n + 1j*(2*pi*0.1*n + (pi/4)));
+x_real = real(x_n);
+x_img = imag(x_n);
+figure,
+subplot(211), stem(n, x_real), grid,
+title('Real(x(n))');
+subplot(212), stem(n, x_img), grid,
+title('Img(x(n))');

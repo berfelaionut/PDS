@@ -1,0 +1,6 @@
+%Prob 5
+clear variables;
+n = 1:99;
+x_n = [1 sinc(0.1*n)]; % sinc(x) = sin(πx) / (πx)
+m = 0:99;
+figure, stem(m, x_n), grid;

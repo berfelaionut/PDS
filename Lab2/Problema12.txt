@@ -1,0 +1,20 @@
+%Prob 12
+%Secventa sinusoidala de lungime finita. 
+%Functia trebuie sa aiba 5 argumente de intrare: 3 pentru parametrii sinusoidei si 2 pentru a
+%specifica domeniul temporal. Sinusoida trebuie si afisata grafic.
+%• function x = Sinusoida(A, f, fi, nl, nu)
+
+%function [x, n] = Sinusoida(A, f, phi, ni, ns)
+% n = nl:nu; % Domeniu Timp
+% x = A * sin(2*pi*f*n + phi);
+% figure, grid
+% stem(n, x);
+%end
+
+clear variables;
+A = 2;
+f = 1/15;
+fi = pi/15;
+nl = 0;
+nu = 60;
+%Sinusoida(A, f, fi, nl, nu)

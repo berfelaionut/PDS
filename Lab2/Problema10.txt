@@ -1,0 +1,10 @@
+%Prob 10 _ Secventa obtinuta prin insumarea unei sinusoide cu un zgomot
+%uniform, cu amplit de 10 ori mai mica
+clear variables;
+n = 0:0.1:49;
+A = 10;
+f = 1/25;
+x = A*sin(2*pi*f*n);
+zg = A/10 * rand(1, length(n));
+y = x + zg;
+figure, plot(n, y), grid

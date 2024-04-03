@@ -1,0 +1,13 @@
+%Prob 7 _ 3 secvente sinusoidale cu amplitudini, frecvente si faze diferite
+clear variables;
+n = 0:0.01:10; % de la 0 la 10 cu pas 0.01
+A = [1.5 2.5 3.5];
+f = [0.1 0.5 0.8];
+faza = [pi/3 pi/4 pi/2];
+s1 = A(1)*sin(2*pi*f(1)*n + faza(1));
+s2 = A(2)*sin(2*pi*f(2)*n + faza(2));
+s3 = A(3)*sin(2*pi*f(3)*n + faza(3));
+figure,
+plot(n, s1, 'r'), hold on,
+plot(n, s2, 'g'), hold on,
+plot(n, s3, 'b'), hold off;

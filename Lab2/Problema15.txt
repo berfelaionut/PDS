@@ -1,0 +1,8 @@
+%Prob 15 _ zgomot la prob 14
+clear variables;
+n = 0:99;
+x1_n = 1*(n==0)-1*(n==5);
+a = 0; b = 0.2;
+zg = a + (b - a)*rand(1, length(x1_n));
+x1_n_zg = x1_n + zg;
+figure, stem(n, x1_n_zg), grid,

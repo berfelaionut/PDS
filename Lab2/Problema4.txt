@@ -1,0 +1,5 @@
+%Prob 4
+clear variables;
+n = 0:19;
+x_n = sin(0.2*n).*(n > 10);
+figure, stem(n, x_n), grid,

@@ -1,0 +1,22 @@
+%Prob 13 _ Sa se modifce functia anterioara, astfel incat sa returneze si un vector care contine indecsii sinusoidei.
+%• function [x, n] = Sinusoida1(A, f, fi, nl, nu)
+
+%function [x, n] = Sinusoida1(A, f, fi, nl, nu)
+% n = nl:nu; % Domeniu Timp
+% x = A * sin(2*pi*f*n + fi);
+% figure, grid
+% stem(n, x);
+% title('Secvență Sinusoidală - II');
+% xlabel('n'), ylabel('Amplitudine');
+% indices = nl:nu;
+% fprintf('Indicii sinusoidei: ');
+% disp(indices);
+%end
+
+clear variables;
+A = 7;
+f = 1/17;
+fi = pi/7;
+nl = 0;
+no = 90;
+%[S, N] = Sinusoida1(A, f, fi, nl, no);

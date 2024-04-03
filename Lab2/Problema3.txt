@@ -1,0 +1,8 @@
+%Prob 3 _ Este aceasta secvența periodica? Dacă da, care este perioada?
+%Perioada T1 = 2pi/4pi = 1/2
+%Perioada T2 = 2p9/0.72pi = 25/0
+%Perioada cel mai mic multiplu comun al perioadelor| T = cmmmc(1/2;25/9)=25 
+clear variables;
+n = 0:100;
+x_n = 3*sin(4*pi*n) + 2*cos(0.72*pi*n);
+figure, stem(n, x_n), grid,

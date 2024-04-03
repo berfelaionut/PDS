@@ -1,0 +1,7 @@
+%Prob 6 _ 16 perioade ale unei secvente periodice, a carei perioada contine 
+% 5 esantioane de 1 urmate de 8 esantioane de 0
+clear variables;
+perioada = [ones(1, 5), zeros(1, 8)];
+secv_periodica = repmat(perioada, 1, 16);
+figure, grid, stem(secv_periodica)
+axis([0 length(secv_periodica) 0 1]);
