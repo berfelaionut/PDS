@@ -1,0 +1,33 @@
+%Prob 4 _ Se considera un semnal analogic sinusoidal cu frecventa de 200 Hz, esantionat 
+% cu 800 Hz. Sa se reprezinte grafic semnalul analogic, secventa obtinuta in urma
+% esantionarii si semnalul analogic reconstituit
+clear variables;
+Fa = 200;
+Fs = 800;
+L = 10;
+P = 10;
+
+% S. analogic
+t = 0:1/(L*Fs):P/Fa-1/(L*Fs); % intervalul de timp analogic
+xa = cos(2*pi*Fa*t);
+
+% S. analogic esantionat
+xn = xa(1:L:length(xa));
+n = 0:length(xn)-1; % timpul discret
+N=seqperiod(xn, 1e-10); %perioada
+
+% S. analogic reconstituit
+% xa_rec(t) = sum[x(n)*sinc(Fs*(t-n/Fs))]; sinc(x)=sin(pi*x)/(pi*x)
+% matricele de timp pentru reconstituire length(n) x lenght(t) (40 x 400)
+% t = n/Fs
+tr = repmat(t, length(xn), 1); % matricea de timp (analogic)
+nr = repmat(n', 1, length(t)); % matricea de timp (discret)
+xa_rec = xn*sinc(Fs*(tr - nr/Fs));
+
+te = 3*(length(t)/P):(P-3)*(length(t)/P);
+ne = 3*N+1:(P-3)*N+1;
+figure,
+subplot(311), plot(t(te), xa(te)), grid, xlim([t(te(1)) t(te(end))]),
+subplot(312), stem(n(ne), xn(ne)), grid,
+subplot(313), plot(t(te), xa(te)), hold all,
+plot(t(te), xa_rec(te), '--'), hold off; grid, xlim([t(te(1)) t(te(end))]),

@@ -1,0 +1,5 @@
+%Prob 5 _
+clear variables;
+num = [1 0 1];
+den = [1 -1.9 1.55 -0.425];
+figure, stem(impz(num, den, 50)), grid,

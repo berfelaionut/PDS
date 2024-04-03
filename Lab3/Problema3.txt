@@ -1,0 +1,19 @@
+%Prob 3 _ Sa se genereze 101 valori corespunzatoare unei secvente obtinute 
+% prin esantionarea cu 1 kHz a unei sinusoide cu amplitudine 2, defezaj 
+% initial 45 grade si frecventa de 100 Hz.
+clear variables;
+n = 0:100;
+Fs = 1e3; %1000
+A = 2;
+fi = pi/4; %45 grade
+Fa = 100;
+x = A*sin(2*pi*(Fa/Fs)*n + fi);
+x_bialternanta = abs(x);
+x_medie = (x + x_bialternanta)/2; % redresat monoalternanta
+figure,
+subplot(311); stem(n, x);
+title('Semnal initial');
+subplot(312); stem(n, x_bialternanta);
+title('Semnal redresat bialternanta');
+subplot(313); stem(n, x_medie); %monoalternanta
+title('Media dintre x(t) si x_bialternanta(t)');

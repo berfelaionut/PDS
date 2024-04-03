@@ -1,0 +1,7 @@
+%Prob 3 _
+clear variables;
+num = [1 1 1 1];
+den = [1 -0.5 -4 2];
+Hz = filt(num, den);
+H = impz(num, den, 100); % raspuns la impuls
+figure, stem(H), grid,

@@ -1,0 +1,57 @@
+%Prob 5 _ Semnale analogice sinusoidale cu frecventele: [100, 300, 400, 500, 600, 800]Hz
+%Fe 900 Hz. Grafic semnalele analogice, secventele obtinute in urma esantionarii si
+% semnalele analogice reconstituite. Există efect de alias? Explicați.
+% Daca exista alias, reprezentati grafic spectrele de amplitudine pentru semnalele analogice
+% initiale si pentru cele reconstituite. Sunt spectre corespunzătoare semnalelor 
+% reconstituite care se suprapun? Explicati
+clear variables;
+Fa = [100, 300, 400, 500, 600, 800];
+Ta = 1./Fa;
+Fs = 900;
+T = 1/Fs; % Sampling period
+% T_a(i)<1 => 'sym' pentru 'lcm'
+Ta_lcm = double(lcm(sym(Ta)));
+L = 10; P = 10;
+t=0:1/(L*Fs):P*Ta_lcm-1/(L*Fs); % interval de timp analogic
+xa = cos(2*pi*Fa'*t);
+figure,
+subplot(4,2,[1,2]),plot(t, xa), grid, axis([0 max(t) -1 1]),
+
+xn = xa(:, 1:L:length(xa));
+n = 0:ceil(length(t)/L)-1;
+
+subplot(4,2,[3,4]), stem(n, xn(1, :)),
+hold all, stem(n, xn(2, :), '--'),
+hold all, stem(n, xn(3, :), '--'),
+hold all, stem(n, xn(4, :), '--'),
+hold all, stem(n, xn(5, :), '--'),
+hold all, stem(n, xn(6, :), '--'),
+hold off; grid, axis([0 max(n) -1 1])
+
+% semnalele analogice reconstituite
+tr = repmat(t, length(xn), 1);
+nr = repmat(n', 1, length(t));
+xa_rec = xn*sinc(Fs*(tr - nr/Fs));
+
+subplot(4,2,[5,6]), plot(t, xa_rec(1, :)),
+hold all, plot(t, xa_rec(2, :), '--'),
+hold all, plot(t, xa_rec(3, :), '--'),
+hold all, plot(t, xa_rec(4, :), '--'),
+hold all, plot(t, xa_rec(5, :), '--'),
+hold all, plot(t, xa_rec(6, :), '--'),
+hold off; grid, xlim([0 max(t)]),
+
+% spectre - domeniul frecventa
+NFFT = 2^nextpow2(length(xa)); % prima putere a lui 2 >= lungimea lui x_a(t)
+F = (L*Fs)*linspace(0, 1, NFFT);
+Xa = fft(xa, NFFT, 2);% spectrele semnalelor analogice initiale
+Xa_rec = fft(xa_rec, NFFT, 2);% spectrele semnalelor analogice reconstituite
+subplot(427),plot(F, abs(Xa(:, :))), grid, xlim([0 F(end)/2]),
+
+subplot(428), plot(F, abs(Xa_rec(1, :))),
+hold all, plot(F, abs(Xa_rec(2, :)), '--'),
+hold all, plot(F, abs(Xa_rec(3, :)), '--'),
+hold all, plot(F, abs(Xa_rec(4, :)), '--'),
+hold all, plot(F, abs(Xa_rec(5, :)), '--'),
+hold all, plot(F, abs(Xa_rec(6, :)), '--'),
+hold off; grid, xlim([0 F(end)/2]),

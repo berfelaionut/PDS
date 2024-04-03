@@ -1,0 +1,24 @@
+%Prob 8 _
+% Punctul A:
+clear variables;
+z = [1 1]; num = poly(z);
+den=[1];
+% Verificare:
+Hz = filt(num,den);
+figure,
+zplane(num, den), grid
+title('Poli-Zero Plot H1 - Cazul 1');
+%functia raspuns la frecventa
+figure, freqz(num,den,2^10);
+
+%Punctul B:
+clear variables;
+z = [exp(1j*pi/6); exp(-1j*pi/6)];
+num = poly(z);
+den = [1];
+% Verificare:
+Hz = filt(num,den);
+figure, zplane(num, den), grid;
+title('Poli-Zero Plot H1 - Cazul 2');
+%functia raspuns la frecventa
+figure, freqz(num,den,2^10);

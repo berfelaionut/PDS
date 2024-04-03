@@ -1,0 +1,141 @@
+% Prob 4 _
+clear variables;
+n = 0:99;
+Fc = 100e3;
+Fm = 10e3;
+Fs = 1e6;
+m = 0.7;
+xp = sin(2*pi*(Fc/Fs)*n); % Purtatoarea
+xm = sin(2*pi*(Fm/Fs)*n); % Modulatoarea
+x_MA = (1 + m.*xm).*xp; % secv. modulata in ampl.
+x_MA_PS=(m*xm).*xp; %secv modulata in amplitudine cu purtatoarea suprimata
+figure,
+subplot(421), stem(n,xp), grid;
+title('Purtatoarea'),
+subplot(422), stem(n,abs(xp)), grid;
+title('|xp|');
+subplot(423), stem(n,xm), grid;
+title('Modulatoarea');
+subplot(424), stem(n,abs(xm)), grid;
+title('|x_MA|');
+subplot(425), stem(n, x_MA), grid;
+title('secv. modulata in ampl.');
+subplot(426), stem(n,abs(x_MA)), grid;
+title('x_MA');
+subplot(427), stem(n, x_MA_PS), grid;
+title('secv modulata in amplitudine cu purtatoarea suprimata');
+subplot(428), stem(n,abs(x_MA_PS)), grid;
+title('|x_MA_PS');
+
+% Prob 4 _ DENISA
+clear variables;
+% Parametri
+Fs = 1e6; % Frecvența de eșantionare
+T = 1/Fs; % Perioada de eșantionare
+t = (0:T:199*T)'; % Vectorul de timp pentru secvența de lungime 100
+t_long = (0:T:199*T)'; % Vectorul de timp pentru secvența de lungime 200
+fc = 100e3; % Frecvența purtătoare
+fm = 10e3; % Frecvența modulatorului
+m_index = 0.7; % Indexul de modulare
+% Generare semnale
+carrier = cos(2*pi*fc*t);
+modulator = cos(2*pi*fm*t);
+am_signal = (1 + m_index * modulator) .* carrier;
+% Trasează semnalele pentru secvența de lungime 100
+figure;
+subplot(3,2,1);
+plot(t, carrier);
+title('Semnal purtător (Lungime 100)');
+xlabel('Timp (s)');
+ylabel('Amplitudine');
+subplot(3,2,3);
+plot(t, modulator);
+title('Semnal modulator (Lungime 100)');
+xlabel('Timp (s)');
+ylabel('Amplitudine');
+subplot(3,2,5);
+plot(t, am_signal);
+title('Semnal AM (Lungime 100)');
+xlabel('Timp (s)');
+ylabel('Amplitudine');
+% Trasează spectrele de amplitudine pentru secvența de lungime 100
+subplot(3,2,2);
+fft_carrier = fft(carrier);
+plot(abs(fft_carrier));
+title('Spectru semnal purtător (Lungime 100)');
+xlabel('Frecvență (Hz)');
+ylabel('Amplitudine');
+subplot(3,2,4);
+fft_modulator = fft(modulator);
+plot(abs(fft_modulator));
+title('Spectru semnal modulator (Lungime 100)');
+xlabel('Frecvență (Hz)');
+ylabel('Amplitudine');
+subplot(3,2,6);
+fft_am_signal = fft(am_signal);
+plot(abs(fft_am_signal));
+title('Spectru semnal AM (Lungime 100)');
+xlabel('Frecvență (Hz)');
+ylabel('Amplitudine');
+
+% Calculează indicii pentru componente
+N = length(am_signal);
+f_carrier = fc;
+f_upper_sideband = fc + fm;
+f_lower_sideband = fc - fm;
+k_carrier = round(f_carrier/Fs * N) + 1;
+k_upper_sideband = round(f_upper_sideband/Fs * N) + 1;
+k_lower_sideband = round(f_lower_sideband/Fs * N) + 1;
+disp('Indici pentru componente (Lungime 100):');
+
+disp(['Purtător: ' num2str(k_carrier)]);
+disp(['Banda laterală superioară: ' num2str(k_upper_sideband)]);
+disp(['Banda laterală inferioară: ' num2str(k_lower_sideband)]);
+
+% Repetă pentru secvența de lungime 200
+figure;
+carrier_long = cos(2*pi*fc*t_long);
+modulator_long = cos(2*pi*fm*t_long);
+am_signal_long = (1 + m_index * modulator_long) .* carrier_long;
+subplot(3,2,1);
+plot(t_long, carrier_long);
+title('Semnal purtător (Lungime 200)');
+xlabel('Timp (s)');
+ylabel('Amplitudine');
+subplot(3,2,3);
+plot(t_long, modulator_long);
+title('Semnal modulator (Lungime 200)');
+xlabel('Timp (s)');
+ylabel('Amplitudine');
+subplot(3,2,5);
+plot(t_long, am_signal_long);
+title('Semnal AM (Lungime 200)');
+xlabel('Timp (s)');
+ylabel('Amplitudine');
+subplot(3,2,2);
+fft_carrier_long = fft(carrier_long);
+plot(abs(fft_carrier_long));
+title('Spectru semnal purtător (Lungime 200)');
+xlabel('Frecvență (Hz)');
+ylabel('Amplitudine');
+subplot(3,2,4);
+fft_modulator_long = fft(modulator_long);
+plot(abs(fft_modulator_long));
+title('Spectru semnal modulator (Lungime 200)');
+xlabel('Frecvență (Hz)');
+ylabel('Amplitudine');
+subplot(3,2,6);
+fft_am_signal_long = fft(am_signal_long);
+plot(abs(fft_am_signal_long));
+title('Spectru semnal AM (Lungime 200)');
+xlabel('Frecvență (Hz)');
+ylabel('Amplitudine');
+% Calculează indicii pentru componente (Lungime 200)
+N_long = length(am_signal_long);
+k_carrier_long = round(f_carrier/Fs * N_long) + 1;
+k_upper_sideband_long = round(f_upper_sideband/Fs * N_long) + 1;
+k_lower_sideband_long = round(f_lower_sideband/Fs * N_long) + 1;
+disp('Indici pentru componente (Lungime 200):');
+disp(['Purtător: ' num2str(k_carrier_long)]);
+disp(['Banda laterală superioară: ' num2str(k_upper_sideband_long)]);
+disp(['Banda laterală inferioară: ' num2str(k_lower_sideband_long)]);

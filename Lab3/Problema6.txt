@@ -1,0 +1,31 @@
+%Prob 6 _ 
+
+clear variables;
+n = 0:200;
+x = 3*cos(2*pi*0.15*n) + 2*cos(2*pi*0.1*n);
+w = rand(1, length(x));
+y = x + w;
+figure,
+subplot(331); stem(n, x), grid,
+subplot(332); stem(n, w), grid,
+subplot(333); stem(n, y), grid,
+
+[r_xx, x_lags] = xcorr(x, 'biased'); % autocorelatia secventei x(n)
+[r_ww, w_lags] = xcorr(w, 'biased'); % autocorelatia secventei w(n)
+[r_xw, xw_lags] = xcorr(x, w, 'biased'); % autocorelatia secventei x(n) si w(n)
+[r_wx, wx_lags] = xcorr(w, x, 'biased'); % autocorelatia secventei w(n) x(n)
+[r_yy, y_lags] = xcorr(y, 'biased'); % autocorelatia secventei y(n)
+
+subplot(3,3,[4,9]),stem(y_lags, r_yy), grid
+
+[maxima, indices] = findpeaks(r_yy);
+diferente = diff(indices);
+T = abs(diferente(1));
+for i = 2:numel(diferente)
+    T = gcd(T, abs(diferente(i)));
+end
+if isempty(T)
+    disp('Secvența nu este periodică.');
+else
+    disp(['Secvența este periodică cu perioada ', num2str(T)]);
+end

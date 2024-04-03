@@ -1,0 +1,19 @@
+%Prob 1 _ Semnal modulat in amplitudine esantionat cu 1 MHz. 
+% Purtatoarea este la 100 kHz, iar modulatoarea la 10 kHz. 
+% Pentru indicele de modulatie se considera 2 valori: 0.2 si 1.2. 
+
+clear variables;
+n = 0:99;
+Fs = 1e6; % 1MHz
+Fc = 100e3; % 100kHz
+Fm = 10e3; % 10kHz
+m = [0.2, 1.2]; % indice de modulatie
+xm = sin(2*pi*Fm/Fs*n);
+xp = sin(2*pi*Fc/Fs*n);
+x_MA = (1 + m(1)*xm) .*xp;
+x_MA_PS = m(1)*xm .*xp;
+figure,
+subplot(211); stem(n, x_MA), grid,
+title('Modulat in amp esantionat'),
+subplot(212); stem(n, x_MA_PS), grid,
+title('Modulat in amp cu purtatoare suprimata')

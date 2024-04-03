@@ -1,0 +1,23 @@
+%Prob 6 _
+clear variables;
+format short;
+n = 0:299;
+num = [1 0.4];
+den = [1 -1.5*cos(pi/8) 0.95];
+
+%b1
+%reprezentare cu impz
+h1 = impz(num, den, length(n));
+%reprezentare cu residuez - descompunere in fractii simple
+[A, p, k] = residuez(num, den);
+h2 = A(1)*p(1).^n + A(2)*p(2).^n;
+figure, 
+    subplot(211),stem(n, h1), hold all,
+    stem(n, h2, '--'), hold off, grid;
+
+%b2
+w0 = pi/6;
+n2 = 0:260;
+x = exp(1j*w0*n2); % excitatia
+y = filter(num, den, x); % răspunsul permanent al sistemului la excitația x
+subplot(212), stem(n2, real(y)), grid, xlim([n2(1) n2(end)]);

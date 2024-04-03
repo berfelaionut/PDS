@@ -1,0 +1,32 @@
+% Prob 5 _
+clear variables;
+% Intervalul pentru n
+n = 0:30;
+% Generam secventa x1(n)
+x1 = 1.*(n >=0 ) - 1.*(n >= 20);
+% Generam secventa x2(n) pe ramurile specificate
+x2 = zeros(size(n));
+x2(n >= 0 & n <= 5) = n(n >= 0 & n <= 5) - 1; % Prima ramura
+x2(n >= 6 & n <= 10) = (-1).^n(n >= 6 & n <= 10); % A doua ramura
+% Valorile lui N
+N_values = [16, 256, 1024];
+% Calculul si reprezentarea DFT-urilor pentru x1 si x2
+for N = N_values
+% Aplicam DFT pentru x1 si x2
+X1 = fft(x1, N);
+X2 = fft(x2, N);
+% Calculam frecventele
+f = -pi:2*pi/N:pi - 2*pi/N;
+% Reprezentare grafica pentru DFT-urile x1 si x2
+figure;
+% X1
+subplot(4,2,1), plot(f, fftshift(real(X1))), title(['Real Part of X1, N = ',num2str(N)]); grid; xlim([-pi pi-2*pi/N])
+subplot(4,2,3), plot(f, fftshift(imag(X1))), title('Imaginary Part ofX1');grid; xlim([-pi pi-2*pi/N])
+subplot(4,2,5), plot(f, fftshift(abs(X1))), title('Magnitude of X1');grid;xlim([-pi pi-2*pi/N])
+subplot(4,2,7), plot(f, fftshift(angle(X1))), title('Phase of X1');grid; xlim([-pi pi-2*pi/N])
+% X2
+subplot(4,2,2), plot(f, fftshift(real(X2))), title(['Real Part of X2, N = ',num2str(N)]);grid; xlim([-pi pi-2*pi/N])
+subplot(4,2,4), plot(f, fftshift(imag(X2))), title('Imaginary Part ofX2');grid; xlim([-pi pi-2*pi/N])
+subplot(4,2,6), plot(f, fftshift(abs(X2))), title('Magnitude of X2');grid;xlim([-pi pi-2*pi/N])
+subplot(4,2,8), plot(f, fftshift(angle(X2))), title('Phase of X2');grid; xlim([-pi pi-2*pi/N])
+end

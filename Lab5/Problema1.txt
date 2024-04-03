@@ -1,0 +1,15 @@
+% Prob 1 _
+clear all;
+n = 0:63;
+x = n + 2*1j;
+y = -n + 3*1j;
+N = length(x);
+X = fft(x);
+Y = fft(y);
+LS = sum(x.*conj(y));
+RS = sum(X.*conj(Y))/N;
+if round(LS-RS, 8) == 0
+    disp('Cele doua sume sunt egale');
+else
+    disp('Cele doua sume sunt diferite');
+end

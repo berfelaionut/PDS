@@ -1,0 +1,12 @@
+% Prob 2 _
+clear variables;
+n =0:10;
+x = [ones(1, 6) zeros(1, 5)]; % ,zeros(1, 117)
+X = fft(x);
+figure,
+subplot(211); stem(0:length(X)-1, abs(X)), grid, % modul
+xlabel('n'); ylabel('Amplitudine');
+title('|(X)|');
+subplot(212); stem(0:length(X)-1, angle(X)), grid; % faza
+xlabel('n'); ylabel('Amplitudine');
+title('Anle(X)');

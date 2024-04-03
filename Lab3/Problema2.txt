@@ -1,0 +1,29 @@
+%Prob 2 _ Dintre toate secventele obtinute prin esantionarea cu 50 kHz 
+% a semnalelor sinusoidale, care are cea mai mare viteza de variatie?
+clear variables;
+n = 0:99;
+Fs = 50e3;
+Fa1 = 20e3;
+Fa2 = 25e3;
+Fa3 = 30e3;
+xa1 = cos(2 * pi * (Fa1 / Fs) * n);
+xa2 = cos(2 * pi * (Fa2 / Fs) * n);
+xa3 = cos(2 * pi * (Fa3 / Fs) * n);
+% Calculati viteza de variatie a fiecarui semnal (amplitudinea derivatei)
+ampl_deriv1 = max(abs(diff(xa1)));
+ampl_deriv2 = max(abs(diff(xa2)));
+ampl_deriv3 = max(abs(diff(xa3)));
+% Identificarea semnalului cu cea mai mare viteza de variatie
+figure;
+subplot(311);
+stem(n, xa1);
+title(['Viteza de variatie a xa1: ' num2str(ampl_deriv1)]);
+subplot(312);
+stem(n, xa2);
+title(['Viteza de variatie a xa2: ' num2str(ampl_deriv2)]);
+subplot(313);
+stem(n, xa3);
+title(['Viteza de variatie a xa3: ' num2str(ampl_deriv3)]);
+
+[max_ampl_deriv, max_signal_index] = max([ampl_deriv1, ampl_deriv2, ampl_deriv3]);
+disp(['Semnalul >viteza de variatie este xa' num2str(max_signal_index) '.']);

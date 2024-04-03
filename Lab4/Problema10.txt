@@ -1,0 +1,26 @@
+%Prob 10_
+clear variables;
+% Definirea coeficienților pentru numărător și numitor pentru H1(z)
+num_H1 = [1 -0.6 1.5 -0.98 0.98];
+den_H1 = [1 1.27 0.22 1.54 0.98];
+% Definirea coeficienților pentru numărător și numitor pentru H2(z)
+num_H2 = [2 -2.54 -5 -4.3 3.27];
+den_H2 = [1 -0.77 0.82 0.41 0.51];
+% Utilizarea funcției zplane pentru a arăta polii și zerourile pentru H1(z)
+figure;
+zplane(num_H1, den_H1);
+title('Polii și zerourile pentru H_1(z)');
+% Utilizarea funcției zplane pentru a arăta polii și zerourile pentru H2(z)
+figure;
+zplane(num_H2, den_H2);
+title('Polii și zerourile pentru H_2(z)');
+% Creați obiectul funcției de transfer
+H = filt(num_H1, den_H1);
+% Verificați stabilitatea
+stability = isstable(H);
+% Afișați rezultatul
+if stability
+    disp('Sistemul este stabil.')
+else
+    disp('Sistemul este instabil.')
+end

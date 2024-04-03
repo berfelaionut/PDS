@@ -1,0 +1,27 @@
+%Prob 1 _
+clear variables;
+n = 0:26.6; % 4 perioade = (1/f)*4
+a = 3; b = -3;
+x1 = sin(2*pi*0.1*n);
+x2 = sin(2*pi*0.15*n);
+%N = seqperiod(x2, 1e-10)
+%a)
+x = a*x1 + b*x2;
+y = x.^2;
+%b)
+y1 = x1.^2;
+y2 = x2.^2;
+yt = a*y1 + b*y2;
+%y(n)-yt(n)
+d=round(y - yt, 10);
+figure,
+    subplot(421), stem(n, x1), grid,
+    subplot(422), stem(n, x2), grid,
+    subplot(412), stem(n, y), grid,
+    subplot(413), stem(n, yt), grid,
+    subplot(414), stem(n, d), grid
+if d==0
+    disp('Sistemul este liniar')
+else
+    disp('Sistemul este neliniar')
+end

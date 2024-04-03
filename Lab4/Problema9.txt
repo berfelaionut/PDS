@@ -1,0 +1,51 @@
+%Prob 9 _
+clear variables;
+num = [1 -4 4];
+den = 1;
+Hz = filt(num, den);
+%1. Reprezentare poli, zerouri
+figure,
+zplane(num, den), grid;
+title('Reprez. poli zerouri - H1');
+% Calcularea răspunsului în frecvență pentru a vedea efectul polilor și zerourilor
+[Hz, freq] = freqz(num, den, 2^10);
+% Trasarea modulului răspunsului la frecvență
+figure,
+plot(freq/pi, mag2db(abs(Hz)));
+title('Modulul răspunsului la frecvență');
+xlabel('Frecvența normalizată (\times\pi rad/eșantion)');
+ylabel('Modul');
+grid on;
+%Raspuns la impuls
+n = 0:30;
+h= impz(num, den, length(n));
+figure,
+stem(n, h), hold all,
+stem(n, h, '--'), hold off; grid,
+legend('h(n) - residuez', 'h(n) - impz', 'Location', 'best'),
+legend('boxoff'), xlabel('n'), ylabel('h(n)');
+
+%%%$$$$H4
+clear variables;
+num = conv([1 1], [1 1]);
+den = [1 -1 0.25];
+% Reprezentarea grafică a polilor și zerourilor
+figure;
+zplane(num, den);
+title('Planul z cu polii și zerourile pentru punctul (a)');
+% Calcularea răspunsului în frecvență pentru a vedea efectul polilor și zerourilor
+[Hz, freq] = freqz(num, den, 2^10);
+% Trasarea modulului răspunsului la frecvență
+figure;
+plot(freq/pi, mag2db(abs(Hz)));
+title('Modulul răspunsului la frecvență');
+xlabel('Frecvența normalizată (\times\pi rad/eșantion)');
+ylabel('Modul');
+grid on;
+%Raspuns la impuls
+n = 0:30;
+h= impz(num, den, length(n));
+figure, stem(n, h), hold all, stem(n, h, '--'), hold off; grid,
+legend('h(n) - residuez', 'h(n) - impz', 'Location', 'best'),
+legend('boxoff'),
+xlabel('n'), ylabel('h(n)');

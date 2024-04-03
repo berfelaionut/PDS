@@ -1,0 +1,8 @@
+%Prob 2 _
+clear variables;
+num = [0.5 0.5 0]; % Coef. numaratorului
+den = [1 -1 -0.5]; % Coef. numitorului
+% Crearea fct. de transfer
+H = tf(num, den);
+[y, t] = impulse(H);
+figure, stem(t, y), grid, % sau impz(num, den);

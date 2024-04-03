@@ -1,0 +1,11 @@
+%Prob 7 _
+clear variables;
+num1 = [1 0.2];
+num2 = [1 0 5];
+num = conv(num1, num2);
+den1 = [1 -0.7];
+den2 = [1 -1 0.49];
+den = conv(den1, den2);
+figure, zplane(num, den), grid,
+%Functia raspuns la frecventa
+figure,freqz(num, den);

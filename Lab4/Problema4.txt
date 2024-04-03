@@ -1,0 +1,11 @@
+%Prob 4 _
+clear variables;
+% Al treilea argument, -1, la funcția tf indică faptul că sistemul
+% este un sistem în timp discret fără un timp de eșantionare specificat
+num = [1 0];
+den = [1 -1];
+Hz = tf(num,den, -1);
+t = 0:199;
+[y, t] = impulse(Hz, t);
+figure,
+stem(t, y), grid, % sau stem(impz(num, den, 200)),
