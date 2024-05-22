@@ -1,0 +1,25 @@
+clear variables;
+T = 0.1; %a
+n = 0:599; %600 esantioane
+t = n*T;
+
+num = T/2*[1 1];
+den = [1 -1];
+
+x = 0.9.^t .*sin(2*t);
+y = filter(num, den, x);
+
+figure,
+stem(n, x), hold all;
+stem(n, y, '--'), hold off; grid, legend ('Input Data', 'Filtered data')
+
+
+
+T2 = 0.05; %b
+t2 = n*T2;
+num2 = T2/2*[1 1];
+x2 = 0.9.^t2.*sin(2*t2);
+y2 = filter(num2, den, x2);
+figure,
+stem(n, x2), hold all;
+stem(n, y2, '--'), hold off; grid, legend ('Input Data', 'Filtered data'),

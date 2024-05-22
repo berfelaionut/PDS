@@ -1,0 +1,9 @@
+clear varaibles;
+N=55;
+f=[0 0.2 0.22 0.43 0.5 1];
+a=[0 0 1 1 0 0];
+h=fir2(N,f,a);
+h1=firpm(N,f,a);
+figure, stem(0:length(h)-1, h);
+figure, stem(0:length(h1)-1, h1);
+figure, freqz(h,1,2^10);

@@ -1,0 +1,24 @@
+dp = 0.1;
+ds = 0.01;
+fp = 0.22;
+fs = 0.25;
+Rp = 20*log10((1+dp)/(1-dp));
+Rs = -20*log10(ds);
+Wp = 2*pi*Rp;
+Ws = 2*pi*Rs;
+
+[n,w]=cheb1ord(Wp,Ws,Rp,Rs,'s');
+
+[b,a]=cheby1(n,Rp,Wp,'s');
+figure, freqz(b,a);
+
+figure, grpdelay(b,a)
+%%filtru digital filt, filtru analogic tf
+H=filt(b,a);
+
+%stabilitate
+if isstable(b,a)==1
+    disp('Filtru digital este stabil')
+else
+    disp('Filtru digital este instabil')
+end

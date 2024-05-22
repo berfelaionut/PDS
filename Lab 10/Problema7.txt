@@ -1,0 +1,23 @@
+clear variables;
+fp = 0.22; Wp = 2*fp;
+fs = 0.25; Ws = 2*fs;
+
+R_bt = 0.1;
+R_bo = 0.01;
+
+Rp = 20*log10((1+R_bt)/(1-R_bt));
+Rs = -20*log10(R_bo);
+
+[n, Wn] = buttord(Wp, Ws, Rp, Rs);
+[b, a] = butter(n, Wn);
+
+H = filt(b, a);
+
+figure, freqz(b, a, 2^10);
+figure, grpdelay(b, a, 2^10);
+
+if abs(roots(a)) < 1
+	disp('FTJ stabil')
+else
+	disp('FTJ este instabil')
+end

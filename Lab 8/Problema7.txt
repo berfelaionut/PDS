@@ -1,0 +1,15 @@
+clear variables;
+L=55;%lungimea
+N=L-1;%ordin
+F=[0.2 0.3];
+
+% Frecvențele normalizate și magnitudinea dorită
+h = [0, F(1), F(2), 1];
+m = [0, 0, 1, 1];
+
+% Proiectarea filtrului trece-sus
+fts = fir2(N, h, m);
+
+% Afișarea caracteristicilor de frecvență
+figure;
+freqz(fts, 1, 2^10);

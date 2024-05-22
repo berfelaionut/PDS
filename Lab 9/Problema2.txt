@@ -1,0 +1,14 @@
+clear variables;
+wc = 0.3*pi;
+a = (1-sin(wc))/cos(wc);
+num = (1-a)/2*[1 1];
+den = [1 -a];
+H = filt(num, den);
+
+%caracteristicile raspunsului la frecventa
+figure,
+freqz(num, den, 2^10);
+
+%timp de intarziere
+figure,
+grpdelay(num, den, 2^10);

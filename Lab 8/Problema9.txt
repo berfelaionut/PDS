@@ -1,0 +1,17 @@
+clear variables;
+L=61;
+N=L-1;%ordin
+f=[0 0.1 0.9 1];
+m=[1 1 0 0];
+
+R_bt = 0.01; %riplul in banda de trecere
+R_bo = 0.1; %riplul in banda de oprire
+dev = [R_bt, R_bo];
+
+%proiectare filtru
+h=firpm(N, f, m,[dev(1) dev(2)]);%raspuns la impuls
+
+figure, impz(h);
+
+%raspuns la frecventa
+figure, freqz(h,1,2^10);
