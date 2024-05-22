@@ -1,0 +1,14 @@
+clear variables;
+N=40;
+L=N+1;
+Fl=0.2;
+Fu=0.6;
+F=[Fl Fu];
+%proiectare filtru
+h1=fir1(N,[F(1) F(2)]);
+h=fir1(N,[F(1) F(2)],hamming(L));
+%raspuns la impuls
+figure, impz(h),grid;
+figure, impz(h1),grid;
+%raspus la frecventa
+figure, freqz(h,1,2^10);

@@ -1,0 +1,17 @@
+clear variables;
+n = 8;
+f = [0 0.25 0.3 0.6 0.65 1]; % vector frecventa
+m = [1 1 0 0 1 1]; % vector amplitudini
+
+% proiectare filtru digital
+[num, den] = yulewalk(n, f, m);
+[H, w] = freqz(num, den, 2^10);
+
+figure,
+subplot(211),
+plot(w/pi, abs(H)), hold all,
+plot(f, m, '--'), hold off; grid,
+ylabel('|H(\omega)|'),
+legend('Yule-Walker', 'ideal', 'Location', 'best'), legend boxoff,
+subplot(212), plot(w/pi, angle(H)), grid,
+xlabel('Frecventa normalizata (\times rad/esantion)'), ylabel('\angle{H(\omega)}')

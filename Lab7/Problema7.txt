@@ -1,0 +1,20 @@
+clear variables;
+n = 0:10;
+x1 = 1.1 * cos(pi*0.25*n+pi/6);
+x2 = power(-2,n);
+
+%convolutia liniara
+y_liniara = conv(x1, x2);
+
+%convolutia circulara
+y_circulara = cconv(x1, x2);
+
+figure,
+subplot(221), stem(0:length(x1)-1, x1), grid,
+xlabel('n'), ylabel('Amplitudine'), title('x1(n)');
+subplot(222), stem(0:length(x2)-1, x2), grid,
+xlabel('n'), title('x2(n)');
+subplot(212), stem(0:length(y_circulara)-1, y_circulara), hold all, grid,
+stem(0:length(y_liniara)-1, y_liniara, '--'), hold off,
+xlabel('n'), ylabel('Amplitudine'), title('Convolutia circulara')
+legend('circulara', 'liniara');

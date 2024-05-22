@@ -1,0 +1,14 @@
+clear variables;
+n = 0:31;
+h = exp(-0.15*n);
+H = length(h);
+x = 1*(n>=0) - 1*(n>=30);
+X = length(x);
+y=conv(h, x);
+N = H + X - 1;
+disp(['Lungimea convolutiei liniare este: ' num2str(N)])
+
+figure,
+subplot(221); stem(n, h);
+subplot(222); stem(n, x);
+subplot(212); stem(0:62, y);

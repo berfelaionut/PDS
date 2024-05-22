@@ -1,0 +1,6 @@
+clear variables;
+clear variables;
+N = 5;
+fc=0.2;
+[num, den] = butter(N, 2*pi*fc/pi);
+figure, freqz(num, den, 2^10);
